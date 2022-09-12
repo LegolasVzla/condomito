@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+
+####################
+##condomito-api
+####################
+
+  condomito:
+    container_name: condomito
+    build:
+      context: condomito
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 8045
+    networks:
+      backend:
+        aliases:
+          - condomito
+    volumes:
+      - ./condomito/src/:/usr/src/app
+    ports:
+      - 9154:8045
+
+volumes:
+  db-data:
+  data01:
+
+networks:
+  backend:
